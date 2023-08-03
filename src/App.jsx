@@ -6,6 +6,8 @@ import { useEffect } from 'react'
 import { getAllProductsThunk } from './store/slices/products.slice'
 import { useDispatch } from 'react-redux'
 import Header from './components/shared/Header'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
       <Header />
       <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
       </Routes>
       
       </div>
