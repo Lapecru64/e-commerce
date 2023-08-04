@@ -1,8 +1,19 @@
+import { useNavigate } from "react-router-dom"
 
 
 const CardProduct = ({ product }) => {
+
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+   navigate(`/product/${product.id}`)
+  }
+
+  const handleAddCart = e => { e.stopPropagation()
+  }
+
   return (
-    <article>
+    <article onClick={handleNavigate}>
         <header>
             <img src={product.images[0].url} alt="" />
         </header>
@@ -13,7 +24,7 @@ const CardProduct = ({ product }) => {
             <h3>Price</h3>
             <span>{product.price}</span>
         </article>
-        <button>
+        <button onClick={handleAddCart}>
         <i className='bx bxs-cart-add' ></i>
         </button>
         </section>
