@@ -1,20 +1,39 @@
 import { useEffect } from "react"
 import useFetch from "../hooks/useFetch"
+import CardProduct from "../HomePage/CardProduct"
 
 const SimilarProducts = ({ product }) => {
 
-const [ productByCategory, getProductByCategory ] = useFetch()
+const [ productsByCategory, getProductsByCategory ] = useFetch()
 
 useEffect(() => {
     if(product) {
-    getProductByCategory(`/products?categoryId=${product.categoryId}`)
+    getProductsByCategory(`/products?categoryId=${product.categoryId}`)
     }
 }, [product])
 
 
-  return (
-    <div>SimilarProducts</div>
-  )
+const cbFilter = prod => {
+  if(prod.id !== product.id) {
+    return prod
+  }
 }
+
+  return (
+    <div>
+      <h3>Similar Products</h3>
+    <div>
+    {
+    productsByCategory?.filter(cbFilter).map(prod => (
+      <CardProduct
+       key={prod.id}
+       product={prod}
+       />
+    ))
+    }
+    </div>
+    </div>
+     )
+    }
 
 export default SimilarProducts

@@ -15,7 +15,7 @@ const ProductIdPage = () => {
         getSingleProduct(`/products/${id}`)
     }, [id])
 
-    console.log(product)
+  
 
   return (
     <div>
