@@ -1,8 +1,10 @@
+import axios from "axios"
 import { useParams } from "react-router-dom"
 import useFetch from "../components/hooks/useFetch"
 import { useEffect } from "react"
 import ProductInfo from "../components/ProductIdPage/ProductInfo"
 import SimilarProducts from "../components/ProductIdPage/SimilarProducts"
+
 
 const ProductIdPage = () => {
 

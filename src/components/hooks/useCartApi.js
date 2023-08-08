@@ -1,6 +1,8 @@
+import axios from 'axios';
 import { useDispatch } from "react-redux"
 import { addCartG, getCardThunk } from "../../store/slices/cart.slice"
 import getConfigToken from "../../utils/getConfigToken"
+
 
 const useCartApi = () => {
  const baseUrl = "https://e-commerce-api-v2.academlo.tech/api/v1"
@@ -20,13 +22,20 @@ const addProductInCart = (data) => {
 }
 
 //DELETE
-
-
-return { addProductInCart }
-
+const deleteProductInCart = (id) => {
+    const url = `${baseUrl}/cart/${id}`
+    axios.delete(url, getConfigToken())
+    .then(res => {
+        console.log(res.data)
+        dispatch(getCardThunk())
+    })
+    .catch(err => console.log(err))
 }
 
 
+return { addProductInCart, deleteProductInCart }
+
+}
 
 
 export default useCartApi

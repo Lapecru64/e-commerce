@@ -12,13 +12,15 @@ const CardProduct = ({ product }) => {
    navigate(`/product/${product.id}`)
   }
 
-  const handleAddCart = e => { e.stopPropagation()
+  const handleAddCart = (e) => {
+    e.stopPropagation();
     const data = {
       quantity: 1,
-      productId: product.id
-    }
-    addProductInCart()
-  }
+      productId: product.id,
+    };
+    addProductInCart(data); // Call the addProductInCart function with data
+  };
+
 
   return (
     <article className="card" onClick={handleNavigate}>
