@@ -7,25 +7,22 @@ const cartSlice = createSlice({
   initialState: [],
   reducers: {
     setCartG: (state, action) => action.payload,
-    addCartG: (state, action) => [...state, action.payload],
-    deleteCartG: (state, action) => state.filter((prod) => prod.id !== action.payload),
-    updateCartQuantity: (state, action) => {
-      const { id, quantity } = action.payload;
-      return state.map((prod) =>
-        prod.id === id ? { ...prod, quantity } : prod
+    addToCart: (state, action) => [...state, action.payload],
+    removeFromCart: (state, action) =>
+      state.filter((item) => item.id !== action.payload),
+    updateCartItem: (state, action) => {
+      const updatedCart = state.map((item) =>
+        item.id === action.payload.id ? action.payload : item
       );
+      return updatedCart;
     },
+    clearCart: () => [], // Agrega una nueva acción para eliminar todos los productos del carrito
   },
 });
 
-export const {
-  setCartG,
-  addCartG,
-  deleteCartG,
-  updateCartQuantity, // Agregamos la acción de actualización
-} = cartSlice.actions;
+export const { setCartG, addToCart, removeFromCart, updateCartItem, clearCart } = cartSlice.actions;
 
-export default cartSlice.reducer;
+// ...
 
 export const getCardThunk = () => (dispatch) => {
   const url = "https://e-commerce-api-v2.academlo.tech/api/v1/cart";
@@ -33,5 +30,12 @@ export const getCardThunk = () => (dispatch) => {
   axios
     .get(url, getConfigToken())
     .then((res) => dispatch(setCartG(res.data)))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      dispatch(setCartG([]));
+    });
 };
+
+// ...
+
+export default cartSlice.reducer;

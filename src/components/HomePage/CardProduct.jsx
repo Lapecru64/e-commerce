@@ -21,7 +21,6 @@ const CardProduct = ({ product }) => {
     addProductInCart(data); // Call the addProductInCart function with data
   };
 
-
   return (
     <article className="card" onClick={handleNavigate}>
         <header className="card_header">

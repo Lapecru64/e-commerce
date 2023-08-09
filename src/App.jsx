@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import HomePage from './pages/HomePage'
@@ -10,7 +9,6 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ProductIdPage from './pages/ProductIdPage'
 import CartPage from './pages/CartPage'
-
 
 function App() {
 

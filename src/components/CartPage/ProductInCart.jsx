@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteCartG } from '../../store/slices/cart.slice';
-import { updateCartQuantity } from '../../store/slices/cart.slice'; // Asumiendo que existe una acción para actualizar la cantidad en el carrito
+import { removeFromCart, updateCartItem } from '../../store/slices/cart.slice';
+import "./ProductInCart.css"
 
 const ProductInCart = ({ prodCart }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteCartG(prodCart.id));
+    dispatch(removeFromCart(prodCart.id));
   };
 
   const handleDecreaseQuantity = () => {
@@ -16,7 +16,7 @@ const ProductInCart = ({ prodCart }) => {
         ...prodCart,
         quantity: prodCart.quantity - 1,
       };
-      dispatch(updateCartQuantity(updatedCartProduct));
+      dispatch(updateCartItem(updatedCartProduct));
     }
   };
 
@@ -25,20 +25,24 @@ const ProductInCart = ({ prodCart }) => {
       ...prodCart,
       quantity: prodCart.quantity + 1,
     };
-    dispatch(updateCartQuantity(updatedCartProduct));
+    dispatch(updateCartItem(updatedCartProduct));
   };
 
   return (
-    <article>
+    <article className="product-cart">
       <header>
         <img src={prodCart.product.images[0].url} alt="" />
       </header>
       <section>
         <h3>{prodCart.product.title}</h3>
         <div>
-          <button onClick={handleDecreaseQuantity}>-</button>
-          <span>{prodCart.quantity}</span>
-          <button onClick={handleIncreaseQuantity}>+</button>
+          <button className="sub" onClick={handleDecreaseQuantity}>
+            -
+          </button>
+          <span className="quantity">{prodCart.quantity}</span>
+          <button className="add" onClick={handleIncreaseQuantity}>
+            +
+          </button>
         </div>
         <button onClick={handleDelete}>
           <i className='bx bx-trash'></i>
@@ -53,4 +57,3 @@ const ProductInCart = ({ prodCart }) => {
 };
 
 export default ProductInCart;
-
