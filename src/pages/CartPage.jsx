@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from "react";
 import ProductInCart from "../components/CartPage/ProductInCart";
 import { useDispatch, useSelector } from "react-redux";
 import { getCardThunk, clearCart, removeFromCart } from "../store/slices/cart.slice";
-
+import PaymentButton from "../components/CartPage/PaymentButton";
 
 const CartPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -56,7 +57,8 @@ const CartPage = () => {
         <div className="modal">
           <div className="modal-content">
             <p>Total to pay: {totalToPay}</p>
-            <button onClick={handleClearCart}>Go to payment page</button>
+            <PaymentButton />
+            <button onClick={handleClearCart}>Clear Cart</button> {/* Agregar el botón para borrar el carrito */}
             <button onClick={closeModal}>Close</button>
           </div>
         </div>
